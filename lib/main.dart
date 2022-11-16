@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/app/app_init.dart';
 import 'package:e_commerce_app/utils/constants/constant.dart';
 import 'package:e_commerce_app/utils/static_methods.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ late ObjectBoxHelper objectBox;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   objectBox = await ObjectBoxHelper.init();
-  StaticMethods.changeStatusBar();
+  AppInit.init();
+  /*objectBox = await ObjectBoxHelper.init();
+  StaticMethods.changeStatusBar();*/
   runApp(const MyApp());
 }
 

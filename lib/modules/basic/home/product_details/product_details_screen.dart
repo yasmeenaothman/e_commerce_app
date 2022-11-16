@@ -10,6 +10,7 @@ import '../../../../helpers/color_helper.dart';
 import '../../../../modles/cart_model.dart';
 import '../../../../utils/app_text_style.dart';
 import '../../../../utils/static_methods.dart';
+import '../../../../widgets/images_slider.dart';
 import '../../../../widgets/spin_box_idget.dart';
 import '../home_screen_controller.dart';
 
@@ -24,7 +25,7 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              /*Container(
                 height: 300.h,
                 decoration: _buildBoxDecoration(),
                 child: Padding(
@@ -52,6 +53,39 @@ class ProductDetailsScreen extends StatelessWidget {
                             : AssetsHelper.heartIcon,
                       ),
                     ],
+                  ),
+                ),
+              ),*/
+              ImagesSlider(
+                widget: Container(
+                  height: 300.h,
+                  decoration: _buildBoxDecoration(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StaticMethods.svgPictureWidget(
+                              () {
+                            Get.offAndToNamed(Constant.homeScreen);
+                          },
+                          AssetsHelper.backIcon,
+                        ),
+                        StaticMethods.svgPictureWidget(
+                              () {
+                            FavouriteModel favouriteProduct =FavouriteModel(
+                              title: homeController.selectedProduct!.title,
+                              price: homeController.selectedProduct!.price,
+                              img: homeController.selectedProduct!.images[0],
+                            );
+                            StaticMethods.checkFavourite(homeController, favouriteProduct);
+                          },
+                          homeController.favouriteProducts.any((element) => element.title == homeController.selectedProduct!.title)
+                              ? AssetsHelper.heartIconFill
+                              : AssetsHelper.heartIcon,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -137,12 +171,24 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               CustomElevatedButton(
                 onPressed: (){
+                  CartModel? cartModel = homeController.cartProducts.firstWhereOrNull((element) => element.title == homeController.selectedProduct!.title);
+                  if(cartModel!=null){
+                    cartModel.quantity+= homeController.num;
+                    homeController.insertProductToCart(cartModel);
+                    return;
+                  }
                   homeController.insertProductToCart(CartModel(
+                    title: homeController.selectedProduct!.title,
+                    quantity: homeController.num,
+                    price: (homeController.selectedProduct!.price),
+                    img: homeController.selectedProduct!.images[0],
+                  ));
+                 /* homeController.insertProductToCart(CartModel(
                     title: homeController.selectedProduct!.title,
                     quantity: homeController.num,
                     price: homeController.selectedProduct!.price,
                     img: homeController.selectedProduct!.images[0],
-                  ));
+                  ));*/
                 },
                 btnName: Constant.addToCart,
               ),
@@ -163,48 +209,12 @@ class ProductDetailsScreen extends StatelessWidget {
         bottomRight: Radius.circular(20.r),
       ),
       image: DecorationImage(
-        image: NetworkImage(homeController.selectedProduct!.images[0]),
+        image: NetworkImage(homeController.selectedProduct!.images[homeController.sliderIndex]),
         fit: BoxFit.fill
       )
     );
   }
 
-  /*_checkFavourite(){
-    homeController.favouriteProducts.any((element) => element.title == homeController.selectedProduct!.title)
-        ? homeController
-        .removeProductFromFavourite(homeController.selectedProduct!.idProduct)
-        : homeController.insertProductToFavourite(homeController.selectedProduct!);
-
-    print(homeController.favouriteProducts.length);
-  }*/
-
-  /*Widget _buildElevatedButton(){
-    return ElevatedButton(
-      onPressed: (){
-        homeController.insertProductToCart(CartModel(
-          title: homeController.selectedProduct!.title,
-          quantity: homeController.num,
-          price: homeController.selectedProduct!.price,
-          img: homeController.selectedProduct!.images[0],
-        ));
-      },
-      style: ElevatedButton.styleFrom(
-        primary: ColorHelper.blue_126881,
-        fixedSize: Size(double.infinity,60.h),
-        padding: EdgeInsets.symmetric(horizontal: 30.w),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(31.r),
-        ),
-      ),
-      child:  Text(
-        Constant.addToCart,
-        style: AppTextStyle.buildQuickSandBoldTextStyle(
-          color: Colors.white,
-          size: 14,
-        ),
-      ),
-    );
-  }*/
   Widget _buildIconButton(VoidCallback onPressed, path){
     return IconButton(
       onPressed: onPressed,

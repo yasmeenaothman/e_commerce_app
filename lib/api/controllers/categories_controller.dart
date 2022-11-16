@@ -10,4 +10,7 @@ class CategoriesController extends GetxController{
   static Future getSingleCategoryRequest(int id){
     return dioHelper().get('${Constant.categoriesUrl}/$id');
   }
+  static Future getAllProductsByCategoryRequest(int categoryID){
+    return dioHelper().get('${Constant.categoriesUrl}/$categoryID/${Constant.productsUrl}');
+  }
 }

@@ -4,6 +4,7 @@ import '../../helpers/assets_helper.dart';
 import '../../modules/basic/basic_screen.dart';
 import '../../modules/basic/cart/cart_screen.dart';
 import '../../modules/basic/favourite/favourite_screen.dart';
+import '../../modules/basic/home/category/category_screen.dart';
 import '../../modules/basic/home/home_screen.dart';
 import '../../modules/basic/home/product_details/product_details_screen.dart';
 
@@ -19,6 +20,7 @@ class Constant{
   static const favouriteScreen = '/FavouriteScreen';
   static const cartScreen = '/CartScreen';
   static const basicScreen = '/BasicScreen';
+  static const categoryScreen = '/CategoryScreen';
 
  // routes
   static final routes = {
@@ -27,6 +29,7 @@ class Constant{
     favouriteScreen : (_)=> const FavouriteScreen(),
     cartScreen : (_)=> const CartScreen(),
     basicScreen : (_)=> const BasicScreen(),
+    categoryScreen : (_)=> const CategoryScreen(),
   };
 
   static List screens = [

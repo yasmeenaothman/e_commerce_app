@@ -11,19 +11,18 @@ import '../../../modles/cart_model.dart';
 import '../../../utils/constants/constant.dart';
 
 class HomeScreenController extends GetxController{
-  dynamic categories =[];
+ // dynamic categories =[];
   dynamic products =[];
-  /*List<ProductModel> favouriteProducts =[];
-  List<ProductModel> cartProducts =[];*/
   List<FavouriteModel> favouriteProducts =[];
   List<CartModel> cartProducts =[];
   ProductModel? selectedProduct;
   bool isLoading = false;
   int num = 1;
-  updateCategoriesList(List<CategoryModel> categories){
+  int sliderIndex = 0;
+ /* updateCategoriesList(List<CategoryModel> categories){
     this.categories = categories;
     update();
-  }
+  }*/
   setNum(bool isAdd){
     isAdd? num++: num--;
     num <1 ? num =1:null;
@@ -31,6 +30,10 @@ class HomeScreenController extends GetxController{
   }
   resetNum(){
     num = 1;
+    update();
+  }
+  setSliderIndex(int index){
+    sliderIndex = index;
     update();
   }
   updateSelectedProduct(ProductModel selectedProduct){
@@ -41,12 +44,12 @@ class HomeScreenController extends GetxController{
     this.isLoading = isLoading;
     update();
   }
-  getCategories() async {
+ /* getCategories() async {
     setIsLoading(true);
     categories = await CategoriesRepo.getAllCategoriesRequest();
     update();
     setIsLoading(false);
-  }
+  }*/
   getProducts() async {
     setIsLoading(true);
     products = await ProductsRepo.getAllProductsRequest();
@@ -107,7 +110,7 @@ class HomeScreenController extends GetxController{
   @override
   void onInit() {
     // TODO: implement onInit
-    getCategories();
+    //getCategories();
     getProducts();
     //removeAllProductFromFavourite();
     //removeAllProductFromCart();

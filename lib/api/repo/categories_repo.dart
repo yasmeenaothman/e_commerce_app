@@ -23,4 +23,12 @@ class CategoriesRepo{
     }
     return null;
   }
+  static Future<dynamic> getAllProductsByCategoryRequest(int categoryID) async{
+    Response response = await CategoriesController.getAllProductsByCategoryRequest(categoryID);
+    if(response.statusCode == 200){
+      print(response.statusCode);
+      return (response.data).map((e) => ProductModel.fromJson(e)).toList();
+    }
+    return null;
+  }
 }

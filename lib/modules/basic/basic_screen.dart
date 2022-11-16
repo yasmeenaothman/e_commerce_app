@@ -14,7 +14,6 @@ class BasicScreen extends StatefulWidget {
   _BasicScreenState createState() => _BasicScreenState();
 }
 class _BasicScreenState extends State<BasicScreen> {
-  HomeScreenController controller = Get.put(HomeScreenController());
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
