@@ -22,7 +22,7 @@ class ProductModel {
   //@Id()
   int idProduct =0;
   CategoryModel category;
-  List<String> images;
+  List<dynamic> images;
   //final category = ToOne<CategoryModel>();
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -31,7 +31,7 @@ class ProductModel {
     price: json[Constant.priceKey].toInt(),
     description: json[Constant.descriptionKey],
     category: CategoryModel.fromJson(json[Constant.categoryKey]),
-    images: List<String>.from(json[Constant.imagesKey].map((x) => x),),
+    images: List<dynamic>.from(json[Constant.imagesKey].map((x) => x),),
   );
 
   Map<String, dynamic> toJson() => {

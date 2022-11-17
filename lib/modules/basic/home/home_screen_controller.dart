@@ -15,6 +15,7 @@ class HomeScreenController extends GetxController{
   dynamic products =[];
   List<FavouriteModel> favouriteProducts =[];
   List<CartModel> cartProducts =[];
+  dynamic searchResults =[];
   ProductModel? selectedProduct;
   bool isLoading = false;
   int num = 1;
@@ -44,6 +45,10 @@ class HomeScreenController extends GetxController{
     this.isLoading = isLoading;
     update();
   }
+  updateSearchResultsList(List searchResults){
+    this.searchResults = searchResults;
+    update();
+  }
  /* getCategories() async {
     setIsLoading(true);
     categories = await CategoriesRepo.getAllCategoriesRequest();
@@ -53,6 +58,7 @@ class HomeScreenController extends GetxController{
   getProducts() async {
     setIsLoading(true);
     products = await ProductsRepo.getAllProductsRequest();
+    searchResults = products;
     update();
     setIsLoading(false);
   }

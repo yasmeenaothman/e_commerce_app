@@ -48,7 +48,7 @@ class Constant{
   static const String priceKey = "price";
   static const String descriptionKey = "description";
   static const String categoryKey = "category";
-  static const String category = "Category";
+  static const String category = "Categories";
   static const String imagesKey = "images";
   static const String nameKey = "name";
   static const String widgetKey = "widget";
@@ -59,7 +59,7 @@ class Constant{
   static const String noFavourite = "No Favourite Products Yet !!";
   static const String noProductsCart = "No Products in cart Yet !!";
   static const String sureConnection = "sure from your connection";
-  static const String popular = "Popular";
+  static const String allProducts = "Products";
   static const String description = "Description:";
   static const String addToCart = "ADD TO CART";
   static const String quantity = "Quantity:";
@@ -71,6 +71,8 @@ class Constant{
   static const String cart = "Cart";
   static const String delete = "Delete";
   static const String add = "Add";
+  static const String search = "Search for a product ....";
+  static const String noResult = "No matching search results";
   static const String addDone = "The Product Has Been Successfully Added To The";
   static const String deleteDone = "The Product Has Been Successfully Deleted";
 
