@@ -1,12 +1,13 @@
-import 'package:e_commerce_app/modules/basic/home/home_screen_controller.dart';
+import 'package:e_commerce_app/helpers/assets_helper.dart';
+import 'package:e_commerce_app/utils/static_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../helpers/color_helper.dart';
 import '../../utils/app_text_style.dart';
 import '../../utils/constants/constant.dart';
 import '../../widgets/custom_bottom_nav_bar.dart';
+import '../auth/auth_screen_controller.dart';
 
 class BasicScreen extends StatefulWidget {
   const BasicScreen({Key? key}) : super(key: key);
@@ -22,6 +23,14 @@ class _BasicScreenState extends State<BasicScreen> {
       appBar: AppBar(
         shadowColor: ColorHelper.greyF6F6F7,
         elevation: 0,
+        leading: StaticMethods.svgPictureWidget(
+          () {
+            setState(() {
+              Get.find<AuthScreenController>().signOut();
+            });
+          },
+          AssetsHelper.logoutIcon,
+        ),
         title: Text(
           'My ${Constant.tabs[selectedIndex][Constant.nameKey]}',
           style: AppTextStyle.buildQuickSandBoldTextStyle(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../dio_helper.dart';
 
-class ProductsController extends GetxController{
+class ProductsController{
   static Future getAllProductsRequest(){
     return dioHelper().get(Constant.productsUrl);
   }

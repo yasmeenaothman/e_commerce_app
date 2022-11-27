@@ -45,9 +45,14 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.only(end: 30.w),
-                            child: SearchWidget(onChanged: (text) {
-                              searchFunction(text);
-                            }),
+                            child: SearchWidget(
+                              onChanged: (text) {
+                                searchFunction(text);
+                              },
+                              onSelected: (value){
+                                controller.updateIsProductSelected(value==Constant.products?true:false);
+                              },
+                            ),
                           ),
                           SizedBox(
                             height: 24.h,
@@ -79,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsDirectional.only(start: 30.h),
                     child: Text(
-                      Constant.allProducts,
+                      Constant.products,
                       style: AppTextStyle.buildZillaSlabMediumTextStyle(
                         size: 20,
                       ),
@@ -155,7 +160,7 @@ class HomeScreen extends StatelessWidget {
     if(text.isNotEmpty){
       List results = controller.products
           .where(
-            (element) =>( element as ProductModel).title.toLowerCase().contains(
+            (element) =>_getProductProperty(element as ProductModel).toLowerCase().contains(
                   text.toLowerCase(),
                 ),
           )
@@ -165,5 +170,7 @@ class HomeScreen extends StatelessWidget {
     }
     controller.updateSearchResultsList(controller.products);
   }
-
+  String _getProductProperty(ProductModel product){
+    return controller.isProductSelected?product.title:product.category.name;
+  }
 }

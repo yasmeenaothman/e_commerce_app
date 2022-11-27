@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../helpers/assets_helper.dart';
@@ -28,10 +29,10 @@ class StaticMethods{
   static Widget messageWidget(String msg){
     return Center(child: Text(msg,style: AppTextStyle.buildZillaSlabMediumTextStyle(),));
   }
-  static svgPictureWidget(VoidCallback onPressed,String path,){
+  static svgPictureWidget(VoidCallback onPressed,String path,{Color? color}){
     return IconButton(
       onPressed: onPressed,
-      icon: SvgPicture.asset('${AssetsHelper.imgBaseURL}$path',),
+      icon: SvgPicture.asset('${AssetsHelper.imgBaseURL}$path',color: color,),
     );
   }
   static checkFavourite(HomeScreenController controller,FavouriteModel favouriteModel){
@@ -59,6 +60,13 @@ class StaticMethods{
       title,
       msg,
       colorText: ColorHelper.blue_126881,
+    );
+  }
+
+  static showToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      backgroundColor: ColorHelper.blue_126881,
     );
   }
 }

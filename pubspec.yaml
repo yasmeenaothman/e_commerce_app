@@ -1,6 +1,8 @@
 name: e_commerce_app
+#1507151233117457    30750047be9a1c57766a01db40f0f667     https://e-commerce-993e7.firebaseapp.com/__/auth/handler
+#keytool -exportcert -alias androiddebugkey -keystore  C:\Users\pc world\.android\debug.keystore | C:\open_ssI\bin\openssl sha1 -binary | C:\open_ssI\bin\openssl base64
 description: A new Flutter project.
-
+#k5lrgb7LHkcqXM/lRp+ot7a5QEk=
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -38,6 +40,14 @@ dependencies:
   google_nav_bar: ^5.0.6
   carousel_slider: ^4.1.1
   dots_indicator: ^2.1.0
+  firebase_core: ^2.1.1
+  firebase_auth: ^4.1.0
+  google_sign_in: ^5.4.2
+  shared_preferences: ^2.0.15
+  flutter_facebook_auth: ^5.0.6
+  http: any
+  fluttertoast: ^8.0.8
+
   #  flutter_spinbox: ^0.11.0
 
 

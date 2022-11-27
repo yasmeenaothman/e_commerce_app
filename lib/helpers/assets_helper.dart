@@ -16,5 +16,12 @@ class AssetsHelper{
   static const shopIconWithSearch = 'shop_icon_with_search.svg';
   static const searchIcon = 'search_icon.svg';
   static const shopIconWithoutContainer = 'shop_icon_without_container.svg';
+  static const eyeIcon = 'eye_icon.svg';
+  static const leftArrowIcon = 'left_arrow_icon.svg';
+  static const logoutIcon = 'logout_icon.svg';
+  static const splashImg = 'splash_img.svg';
+  static const googleImg = 'google_img.svg';
+  static const fBImg = 'facebook_icon.svg';
+
 
 }

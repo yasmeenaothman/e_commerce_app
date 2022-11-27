@@ -20,6 +20,7 @@ class HomeScreenController extends GetxController{
   bool isLoading = false;
   int num = 1;
   int sliderIndex = 0;
+  bool isProductSelected = true;
  /* updateCategoriesList(List<CategoryModel> categories){
     this.categories = categories;
     update();
@@ -27,6 +28,10 @@ class HomeScreenController extends GetxController{
   setNum(bool isAdd){
     isAdd? num++: num--;
     num <1 ? num =1:null;
+    update();
+  }
+  updateIsProductSelected(bool isProductSelected){
+    this.isProductSelected = isProductSelected;
     update();
   }
   resetNum(){

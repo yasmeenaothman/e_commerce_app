@@ -22,10 +22,10 @@ class CustomElevatedButton extends StatelessWidget {
         fixedSize: Size(double.infinity,60.h),
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(31.r),
+          borderRadius: BorderRadius.circular(30.r),
         ),
       ),
-      child:  Text(
+      child: Text(
         btnName,
         style: AppTextStyle.buildQuickSandBoldTextStyle(
           color: Colors.white,

@@ -7,4 +7,6 @@ class ColorHelper{
   static const greyF6F6F7 = Color(0xFFF6F6F7);
   static const greyACBAC3 = Color(0xFFACBAC3);
   static const pinkE4126B = Color(0xFFE4126B);
+  static const white_FBFBFB = Color(0xFFFBFBFB);
+
 }

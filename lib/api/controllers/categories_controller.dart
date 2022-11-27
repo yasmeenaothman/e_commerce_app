@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../dio_helper.dart';
 
-class CategoriesController extends GetxController{
+class CategoriesController{
   static Future getAllCategoriesRequest(){
     return dioHelper().get(Constant.categoriesUrl);
   }

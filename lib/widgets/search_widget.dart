@@ -11,8 +11,10 @@ class SearchWidget extends StatelessWidget {
   SearchWidget({
     Key? key,
     required this.onChanged,
+    required this.onSelected,
   }) : super(key: key);
   Function(String) onChanged;
+  Function(String) onSelected;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,19 +31,46 @@ class SearchWidget extends StatelessWidget {
           color: Colors.black,
         ),
         decoration: InputDecoration(
-          suffixIcon: StaticMethods.svgPictureWidget(
+          suffixIcon: _buildPopupMenuButton(),
+          /*StaticMethods.svgPictureWidget(
             () {},
             AssetsHelper.searchIcon,
-          ),
+          )*/
           enabledBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
           focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
-          contentPadding: EdgeInsets.symmetric(vertical: 10.h),
+          contentPadding: EdgeInsets.symmetric(vertical: 12.h),
           hintText: Constant.search,
           hintStyle: AppTextStyle.buildNunitoSansRegularTextStyle(
             color: ColorHelper.greyACBAC3,
           ),
         ),
       ),
+    );
+  }
+  Widget _buildPopupMenuButton(){
+    return PopupMenuButton(
+      onSelected: onSelected,
+      icon: Icon(Icons.arrow_drop_down,size: 24.r,color: ColorHelper.blue_126881,),
+      itemBuilder: (BuildContext bc) {
+        return Constant.menuItems.map((e) => PopupMenuItem(
+          value: e,
+          textStyle: AppTextStyle.buildQuickSandBoldTextStyle(),
+          child: Text(e,),
+        ),
+        ).toList();
+        /*[
+          PopupMenuItem(
+            value: Constant.category,
+            textStyle: AppTextStyle.buildQuickSandBoldTextStyle(),
+            child: const Text("category",),
+          ),
+          PopupMenuItem(
+            value: Constant.products,
+            textStyle: AppTextStyle.buildQuickSandBoldTextStyle(),
+            child: const Text("product name",),
+          ),
+        ];*/
+      },
     );
   }
 }
