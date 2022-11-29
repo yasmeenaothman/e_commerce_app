@@ -25,37 +25,6 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*Container(
-                height: 300.h,
-                decoration: _buildBoxDecoration(),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      StaticMethods.svgPictureWidget(
-                        () {
-                          Get.offAndToNamed(Constant.homeScreen);
-                        },
-                        AssetsHelper.backIcon,
-                      ),
-                      StaticMethods.svgPictureWidget(
-                            () {
-                              FavouriteModel favouriteProduct =FavouriteModel(
-                                title: homeController.selectedProduct!.title,
-                                price: homeController.selectedProduct!.price,
-                                img: homeController.selectedProduct!.images[0],
-                              );
-                              StaticMethods.checkFavourite(homeController, favouriteProduct);
-                            },
-                        homeController.favouriteProducts.any((element) => element.title == homeController.selectedProduct!.title)
-                            ? AssetsHelper.heartIconFill
-                            : AssetsHelper.heartIcon,
-                      ),
-                    ],
-                  ),
-                ),
-              ),*/
               ImagesSlider(
                 widget: Container(
                   height: 300.h,
@@ -67,7 +36,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         StaticMethods.svgPictureWidget(
                               () {
-                            Get.offAndToNamed(Constant.homeScreen);
+                            Get.offAndToNamed(Constant.basicScreen);
                           },
                           AssetsHelper.backIcon,
                         ),

@@ -42,7 +42,7 @@ class Constant{
     cartScreen : (_)=> const CartScreen(),
     basicScreen : (_)=> const BasicScreen(),
     categoryScreen : (_)=> const CategoryScreen(),
-    signInScreen : (_)=> const SignInScreen(),
+    signInScreen : (_)=> SignInScreen(),
     signUpScreen : (_)=> const SignUpScreen(),
     verifyScreen : (_)=> const VerifyNumberScreen(),
   };
@@ -97,11 +97,11 @@ class Constant{
   static const enterPinCode = 'Enter The Pin You Have Received Via SMS On';
   static const signIn = 'Sign In';
   static const signUp = 'Sign UP';
-  static const phoneNumber = 'Phone Number';
-  static const email = 'Email';
-  static const enterPhoneNum = 'Enter phone number';
+  static const emailLink = 'Email Link';
+  static const email = 'Email/Password';
+  //static const enterPhoneNum = 'Enter your PhoneNum';
   static const enterName = 'Enter Name';
-  static const enterEmail = 'Enter Email';
+  static const enterEmail = 'Enter your email';
   static const password = 'Password';
   static const createAccount = 'Create account';
   static const weakPass = 'weak-password';
@@ -111,6 +111,10 @@ class Constant{
   static const userNotFound = 'user-not-found';
   static const wrongPass = 'wrong-password';
   static const uid = 'uid';
+  static const emailLinkUrl = 'https://trainning.page.link/amTC';
+  static const payAttention = 'Pay attention';
+  static const packageName = 'com.example.e_commerce_app';
+  static const checkEmail = 'Check Your Email!...then click on the link';
   //static const List imagesPath = ['google_img.svg','facebook_icon.svg'];
   static List<String> menuItems = [
     categoryKey,

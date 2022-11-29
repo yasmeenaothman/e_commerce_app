@@ -4,6 +4,7 @@ import 'package:e_commerce_app/firebase/repo/auth_repo.dart';
 import 'package:e_commerce_app/helpers/shared_prefe_helper.dart';
 import 'package:e_commerce_app/utils/static_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/constants/constant.dart';
 
-class AuthScreenController extends GetxController{
+class AuthScreenController extends GetxController with WidgetsBindingObserver{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -25,6 +26,15 @@ class AuthScreenController extends GetxController{
   setIsPassVisible(){
     isPassVisible = !isPassVisible;
     update();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print('fffffffffffff${state}');
+    if (state == AppLifecycleState.resumed) {
+    getDynamicLink(fromColdState: false);
+    }
+    super.didChangeAppLifecycleState(state);
   }
   Future googleSignIn() async{
     final googleUser = await _googleSignIn.signIn();
@@ -67,6 +77,33 @@ class AuthScreenController extends GetxController{
     }
   }
 
+  sendSignInWithEmailLink() async {
+    if(emailController.text.isNotEmpty){
+      await AuthRepo.sendSignInWithEmailLink(emailController.text.trim());
+    }
+    else{
+      StaticMethods.showToast(Constant.fill);
+    }
+  }
+
+  Future<void> getDynamicLink({required bool fromColdState}) async {
+
+    final PendingDynamicLinkData? data =  fromColdState?await FirebaseDynamicLinks.instance.getInitialLink()
+        :await FirebaseDynamicLinks.instance.onLink.first;
+    print('hhhhhhhhhhhhhh$data');
+    if(data!=null){
+      final String link = data.link.toString();
+      print('mmmmmmmmmmmmmmmmmmmmm$link');
+      bool isAccepted = await AuthRepo.signInWithEmailLink(emailController.text.trim(), link);
+      if(isAccepted){
+        executeWhenUserAccepted();
+      }
+    }
+    else{
+      print('mmmmmmmmmmmmmmmmmmmmm noCredentials were found');
+    }
+
+  }
 
   Future signInFB() async{
     final LoginResult result = await fbLogin.login();
@@ -89,10 +126,9 @@ class AuthScreenController extends GetxController{
     await fbLogin.logOut();
     await _auth.signOut();
     getCurrentUser();
-    print('EEEEEEEEEEEEE$currentUser');
+    print('currentUser is $currentUser');
     SharedPreferenceHelper.sharedHelper.putString(Constant.uid, '');
     Get.offAllNamed(Constant.signInScreen);
-    print("User Sign Out");
   }
   getCurrentUser(){
     currentUser = _auth.currentUser;
@@ -117,7 +153,20 @@ class AuthScreenController extends GetxController{
     cleanControllers();
   }
   @override
-  void onInit() {
-    super.onInit();
+  void onReady() {
+    super.onReady();
+    getDynamicLink(fromColdState: true);
   }
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+  @override
+  void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose();
+  }
+
 }

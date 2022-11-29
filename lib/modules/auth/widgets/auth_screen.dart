@@ -11,10 +11,11 @@ import '../../../widgets/custom_elevated_button.dart';
 import '../auth_screen_controller.dart';
 import 'custom_text_field.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatelessWidget{
   AuthScreen({Key? key, this.isSignUp = false}) : super(key: key);
   final bool isSignUp;
   final AuthScreenController controller = Get.find<AuthScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -60,7 +61,7 @@ class AuthScreen extends StatelessWidget {
                     tabs: [
                       Tab(
                         child: Text(
-                          Constant.phoneNumber,
+                          Constant.emailLink,
                           style: AppTextStyle.buildZillaSlabMediumTextStyle(
                             color: ColorHelper.grey_57636F,
                             size: 16,
@@ -117,7 +118,7 @@ class AuthScreen extends StatelessWidget {
               CustomTextField(
                 //TODO:here make as isEmail?controller.emailController:controller.phoneController
                 controller: authController.emailController,
-                hintText: isEmail? Constant.enterEmail :Constant.enterPhoneNum,
+                hintText: isEmail? Constant.enterEmail :Constant.enterEmail,
                 //onChanged: (s) {},
               ),
               Visibility(
@@ -154,6 +155,9 @@ class AuthScreen extends StatelessWidget {
                     //TODO: in sign up with PhoneNumber you will go to verification screen
                     if(isEmail){
                       isSignUp?authController.signUpWithEmailAndPass(): authController.signInWithEmailAndPass();
+                    }
+                    else{
+                      authController.sendSignInWithEmailLink();
                     }
                   },
                 ),

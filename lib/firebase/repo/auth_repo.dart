@@ -2,6 +2,7 @@ import 'package:e_commerce_app/firebase/controllers/auth_controller.dart';
 import 'package:e_commerce_app/utils/constants/constant.dart';
 import 'package:e_commerce_app/utils/static_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:get/get.dart';
 
 class AuthRepo{
@@ -47,5 +48,31 @@ class AuthRepo{
       return false;
     }
 
+  }
+  static Future<bool> sendSignInWithEmailLink(String email)async{
+    try{
+      await AuthController.sendSignInWithEmailLink(email);
+      print('the email sent');
+      StaticMethods.buildSnackBar(Constant.payAttention, Constant.checkEmail);
+      return true;
+    }catch (e) {
+      StaticMethods.showToast(e.toString());
+      return false;
+    }
+
+  }
+  static Future<bool> signInWithEmailLink(String email, String emailLink)async{
+    bool validLink = AuthController.isSignInWithEmailLink(emailLink);
+    if(validLink){
+      try{
+        await AuthController.signInWithEmailLink(email,emailLink);
+        return true;
+      }catch (e) {
+        StaticMethods.showToast(e.toString());
+        return false;
+      }
+    }
+    print('the link is not valid');
+    return false;
   }
 }
